@@ -16,11 +16,9 @@ if(!empty($_POST)) {
 
   if(!empty($_FILES['photo']['name'])) {
     // s'il y a une photo qui a été ajoutée
-    $photo_bdd = URL . "photo/$_POST[reference]_" .
-    $_FILES['photo']['name']; // cette variable nous permettre de savegarder le chemin vers la base
-    $photo_dossier = RACINE_SITE . " photo/$_POST[reference]_" . $_FILES['photo']['name']; // cette variable nous permettera de saveugarder la photo dans le dossier
-    copy($_FILES['photo']['tmp_name'],
-    $photo_dossier); // copy permet de sauvegarder une fichier sur le serveur.
+    $photo_bdd = URL . "photo/$_POST[reference]_" . $_FILES['photo']['name']; // cette variable nous permettre de savegarder le chemin vers la base
+    $photo_dossier = RACINE_SITE . "photo/$_POST[reference]_" . $_FILES['photo']['name']; // cette variable nous permettera de saveugarder la photo dans le dossier
+    copy($_FILES['photo']['tmp_name'], $photo_dossier); // copy permet de sauvegarder une fichier sur le serveur.
   }
 
   $id_produit = (isset($_GET['id_produit'])) ? $_GET['id_produit'] : 'NULL'; // s'il y a un id_produit dans l'url c'est que nous sommes dans le cas d'une modification
@@ -47,8 +45,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'suppression') {
   $resultat->execute(array(':id_produit' => $_GET['id_produit']));
 }
 //*-------------- LIENS PRODUITS -----------------------------//*
-$content .= '<a href="?action=affichage">Affichage des produits</a><br>'; // Lien d'ajout
-$content .= '<a href="?action=ajout">Ajout d\'un produit</a><br><br><hr><br>'; // Lien d'ajout
+$content .= '<a class="btn btn-primary btn-sm" href="?action=affichage">Affichage des produits</a><br>'; // Lien d'ajout
+$content .= '<a class="btn btn-primary btn-sm" href="?action=ajout">Ajout d\'un produit</a><br><br><hr><br>'; // Lien d'ajout
 
 //*-------------- AFFICHAGE DES PRODUITS -----------------------------//*
 if(isset($_GET['action']) && $_GET['action'] == "affichage") {
@@ -56,7 +54,7 @@ if(isset($_GET['action']) && $_GET['action'] == "affichage") {
 	$resultat->execute();
 	$content .= '<h2>Affichage des produits</h2>';
 	$content .= 'Nombre de produit(s) dans la boutique : ' . $resultat->rowCount();
-	$content .= '<table class="table"><tr>';
+	$content .= '<table class="table table-bordered table-striped"><tr>';
 	for($i = 0; $i < $resultat->columnCount(); $i++) { // boucle sur les colonnes
 		$colonne = $resultat->getColumnMeta($i); // getColumnMeta récupère les informations sur les columnCount
 		$content .= "<th>$colonne[name]</th>";
@@ -85,8 +83,7 @@ if(isset($_GET['action']) && ($_GET['action'] == 'ajout' || $_GET['action'] == '
       "SELECT *
        FROM produit
        WHERE id_produit = :id_produit");
-       $resultat->execute(array('
-       :id_produit' => $_GET['id_produit']));
+       $resultat->execute(array(':id_produit' => $_GET['id_produit']));
        $produit_actuel = $resultat->fetch(PDO::FETCH_ASSOC);
   }
 
