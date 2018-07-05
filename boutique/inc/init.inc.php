@@ -7,7 +7,7 @@
 session_start();
 
 // Définition de constantes
-define("RACINE_SITE", $_SERVER['DOCUMENT_ROOT'] . 'php-advance/boutique/');
+define("RACINE_SITE", $_SERVER['DOCUMENT_ROOT'] . '/php-advance/boutique/');
 define("URL", "http://localhost/php-advance/boutique/");
 
 // Déclaration de variable

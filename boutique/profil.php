@@ -9,6 +9,15 @@ if (!internauteEstConnecte()) {
 if(internauteEstConnecteEtEstAdmin()) {
   $content .= "<h1>Vous êtes Administrateur du site</h1>";
 }
+
+$content .= '<nav><ul>';
+if(internauteEstConnecte()):
+  $content .= '<li><a href="';
+  URL;
+  $content .= 'membres.php?action=modification&id_membre=' . $_SESSION['membre']['id_membre'] . '">Mettre à jour mes informations</a></li>';
+endif;
+$content .= '</nav></ul>';
+
 require_once("inc/haut.inc.php"); ?>
 <?= $content; ?>
 Bonjour <?= $_SESSION['membre']['pseudo'] ?>
