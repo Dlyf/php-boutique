@@ -29,7 +29,7 @@ if($_POST) {
     $_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
 
     if(empty($erreur)) {
-      $r = $pdo->prepare("INSERT INTO membre (pseudo, mdp, nom, prenom, email, civilite, ville, code_postal, adresse) VALUES (:pseudo, :mdp, :nom, prenom, :email, :civilite, :ville, :code_postal, :adresse)");
+      $r = $pdo->prepare("INSERT INTO membre (pseudo, mdp, nom, prenom, email, civilite, ville, code_postal, adresse) VALUES (:pseudo, :mdp, :nom, :prenom, :email, :civilite, :ville, :code_postal, :adresse)");
       $r->execute(array(
         ':pseudo'      => $_POST['pseudo'],
         ':mdp'         => $_POST['mdp'],
@@ -46,6 +46,7 @@ if($_POST) {
 
     $content .= $erreur;
 }
+var_dump($_POST)
 ?>
 <?php
 require_once("inc/haut.inc.php");
